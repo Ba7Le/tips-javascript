@@ -1,9 +1,9 @@
 const express = require('express');
-const UserRoute = require('./Routes/user.js')
+const UserRoute = require('./Routes/User.route.js');
 const createError = require('http-errors');
 const app = express();
-
 require('dotenv').config();
+require('./helps/connection_mongdb.js');
 
 app.get('/', (req, res, next) => {
     res.send('Home page');
