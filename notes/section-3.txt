@@ -9,7 +9,7 @@ SECTION 3: Connect MongoDB to Node.js Using Mongoose và 7 điều cần triển
         7 - Nếu vượt quá kết nối poolSize?
 
 
-==============================cách sử dụng để connect db (có nhược điểm)==== ============================================================
+==============================cách sử dụng để connect db (có nhược điểm)==== ========= ===================================================
                 'use strict'
 
                 const mongoose = require('mongoose')
