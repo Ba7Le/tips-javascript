@@ -1,0 +1,90 @@
+SECTION 3: Connect MongoDB to Node.js Using Mongoose và 7 điều cần triển khai trong hệ thống.
+    7 điều cần sáng tỏ 
+        1 - nhược điểm của connect cũ
+        2 - cách connect mới, khuyên dùng
+        3 - kiểm tra hệ thống có bao nhiêu connect
+        4 - Thông báo khi server quá tải connect
+        5 - Có nên disconnect liên tục hay không
+        6 - PoolSize là gì ? tại sao lại quan trọng
+        7 - Nếu vượt quá kết nối poolSize?
+
+
+==============================cách sử dụng để connect db (có nhược điểm)================================================================
+                'use strict'
+
+                const mongoose = require('mongoose')
+
+                const connectString = 'mongodb://127.0.0.1:27017/shopDev'
+                mongoose.connect(connectString).then(_ => console.log('Connected Mongodb success'))
+                    .catch(err => console.log(`Error Connect`));
+
+                ===== chỉ sử dụng trên môi trường dev====
+                if (1 === 0) { 
+                    mongoose.set('debug', true)
+                    mongoose.set('debug', { color: true })
+                }
+                =========================================
+
+                module.exports = mongoose
+=================================================================================================================================
+
+
+=> Tiếp đây chúng ta sẽ sử dụng cách kết nối db một cách phổ biến hơn
+    - Single ton: phương thức chỉ gọi lại 1 lần thôi (nằm trong 23 design battern)
+        + SingleTon: chỉ được gọi khi phương thức get instance được gọi lần đâu tiên , thì các cuộc gọi tiếp theo đến get instance
+        thì nó sẽ trả về phiên bản hiện có trong MongoDB thay vì tạo 1 phiên bản mới và thiết lập 1 cơ sở dữ liệu mới 
+
+        ==> chat gpt
+                Trong việc kết nối đến MongoDB, Singleton pattern được sử dụng để đảm bảo rằng chỉ có một phiên bản duy nhất của kết nối MongoDB được tạo và sử dụng trong toàn bộ ứng dụng.
+
+        Singleton pattern là một trong 23 mẫu thiết kế (design patterns) trong lập trình hướng đối tượng. Nó đảm bảo rằng một lớp chỉ có một phiên bản duy nhất và cung cấp một điểm truy cập toàn cục tới phiên bản đó.
+
+        Trong trường hợp kết nối đến MongoDB, Singleton pattern được sử dụng để đảm bảo rằng chỉ có một phiên bản duy nhất của kết nối MongoDB được tạo và tái sử dụng trong toàn bộ ứng dụng. Điều này giúp tránh việc tạo ra nhiều kết nối không cần thiết tới cơ sở dữ liệu và tiết kiệm tài nguyên.
+
+        Trong mã code bạn đã cung cấp, Singleton pattern được áp dụng thông qua phương thức `getInstance` của đối tượng mongoose. Khi gọi phương thức `getInstance`, nếu chưa có phiên bản nào của mongoose đã được tạo trước đó, nó sẽ tạo một phiên bản mới và lưu trữ nó. Nếu đã có phiên bản tồn tại, nó sẽ trả về phiên bản đó.
+
+        Việc sử dụng Singleton pattern trong kết nối đến MongoDB giúp đảm bảo rằng chỉ có một kết nối duy nhất được thiết lập và sử dụng trong ứng dụng của bạn, giảm thiểu việc tạo kết nối mới không cần thiết và giữ cho các hoạt động truy vấn dữ liệu hiệu quả hơn.
+
+        Dưới đây là một ví dụ về cách triển khai Singleton pattern trong kết nối đến MongoDB:
+
+        ```javascript
+        const mongoose = require('mongoose');
+
+        class Database {
+        constructor() {
+            this.connection = null;
+        }
+
+        static getInstance() {
+            if (!this.instance) {
+            this.instance = new Database();
+            }
+            return this.instance;
+        }
+
+        connect(connectionString) {
+            return new Promise((resolve, reject) => {
+            if (this.connection) {
+                resolve(this.connection);
+            } else {
+                mongoose.connect(connectionString)
+                .then(connection => {
+                    this.connection = connection;
+                    resolve(connection);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+            }
+            });
+        }
+        }
+
+        module.exports = Database;
+
+        Trong ví dụ trên, lớp Database triển khai Singleton pattern. Phương thức `getInstance` kiểm tra xem đã có một phiên bản duy nhất 
+        của Database được tạo hay chưa, nếu chưa thì tạo một phiên bản mới và lưu trữ nó trong biến `instance
+
+
+
+                
