@@ -1,0 +1,9 @@
+SECTION 3: Connect MongoDB to Node.js Using Mongoose và 7 điều cần triển khai trong hệ thống.
+    7 điều cần sáng tỏ 
+        1 - nhược điểm của connect cũ
+        2 - cách connect mới, khuyên dùng
+        3 - kiểm tra hệ thống có bao nhiêu connect
+        4 - Thông báo khi server quá tải connect
+        5 - Có nên disconnect liên tục hay không
+        6 - PoolSize là gì ? tại sao lại quan trọng
+        7 - Nếu vượt quá kết nối poolSize?

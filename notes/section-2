@@ -1,0 +1,22 @@
+*SECTION 2*
+    - morgan: là 1 cái thư viện để mà in ra các log của chúng ta khi mà 1 người dùng chạy 1 request
+        + morgan có 5 chế độ
+            // app.use(morgan('dev')); dev env
+            // app.use(morgan('combined')); prod env
+            // app.use(morgan('common'));
+            // app.use(morgan('short'));
+            // app.use(morgan('tiny'));
+
+    - curl http://localhost:3055 --include 
+        + include: cho phép chúng ta xem header hệ thống của chúng ta ở trong file curl
+
+    - helmet: là 1 thư viện để bảo vệ thông tin của ứng dụng hiển thị ở header 
+
+    - compression tối ưu performance
+
+    =>   3 cái này nên add vào khi tạo một dự án
+        app.use(morgan('dev'));
+        app.use(helmet());
+        app.use(compression());
+
+
