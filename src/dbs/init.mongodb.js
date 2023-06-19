@@ -1,7 +1,9 @@
 'use strict'
 // Dưới đây là đoạn code để tạo một singleton
 const mongoose = require('mongoose');
-const connectString = 'mongodb://127.0.0.1:27017'
+const { db: { host, port, name } } = require('../configs/config.mongdb')
+const connectString = `mongodb://${host}:${port}/${name}`
+console.log('connectString:: ', connectString)
 const { countConnect } = require('../helpers/check.connect');
 
 class Database {
@@ -18,7 +20,8 @@ class Database {
 
         mongoose.connect(connectString, { maxPoolSize: 50 }
         ).then(_ => {
-            console.log('Connected Mongodb success PRO', countConnect());
+            countConnect();
+            console.log('Connected Mongodb success');
         }).catch(err => console.log(`Error Connect`));
     }
 

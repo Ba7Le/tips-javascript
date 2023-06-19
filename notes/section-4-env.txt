@@ -1,0 +1,10 @@
+=============sự khác nhau giữa .env và config file ====================
+
+    env lưu thông tin nhạu cảm -> ko đẩy lên getInstance
+
+=======================================================================
+
+- với việc setting .env 
+    + tạo .env file -> tạo biến PORT=3052
+    + npm i dotenv
+    + process.env.PORT <=> 3052
