@@ -7,7 +7,7 @@ const server = app.listen(PORT, () => {
 })
 
 
-// ctrl c =>  
-process.on('SIGINT', () => {
-    server.close(() => console.log(`Exist server express`))
-})
+// ctrl c =>
+// process.on('SIGINT', () => {
+//     server.close(() => console.log(`Exist server express`))
+// })

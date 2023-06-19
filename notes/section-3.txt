@@ -9,7 +9,7 @@ SECTION 3: Connect MongoDB to Node.js Using Mongoose và 7 điều cần triển
         7 - Nếu vượt quá kết nối poolSize?
 
 
-==============================cách sử dụng để connect db (có nhược điểm)==== ========= ===================================================
+==============================cách sử dụng để connect db (có nhược điểm)================================================================
                 'use strict'
 
                 const mongoose = require('mongoose')
@@ -84,6 +84,20 @@ SECTION 3: Connect MongoDB to Node.js Using Mongoose và 7 điều cần triển
 
         Trong ví dụ trên, lớp Database triển khai Singleton pattern. Phương thức `getInstance` kiểm tra xem đã có một phiên bản duy nhất 
         của Database được tạo hay chưa, nếu chưa thì tạo một phiên bản mới và lưu trữ nó trong biến `instance
+
+
+======================kiểm tra số lượng connect========================
+const countConnect = () => {
+    const numConnection = mongoose.connections.length
+    console.log(`Number of Connection::${numConnection}`)
+}
+==========================================================================
+
+======================kiểm tra connect bị quá tải========================
+    -const os = require('os'); lõi cpu
+        + cung cấp các phương thức và thuộc tính liên quan đến hệ điều hành.
+==========================================================================
+
 
 
 
