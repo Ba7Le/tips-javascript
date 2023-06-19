@@ -98,6 +98,20 @@ const countConnect = () => {
         + cung cấp các phương thức và thuộc tính liên quan đến hệ điều hành.
 ==========================================================================
 
+==================== PoolSize ========================
+    - ví dụ cái vòi nước, tủ lạnh, chai nước, user, 50 chai
+        + vòi nước: db
+        + tủ lạnh: pool
+        + chai nước: connect
+        + 50 chai: maxPoolSize
+        =>  case 1: tủ lạnh rỗng , 1 user lấy chai -> xuống vòi nước lấy -> tủ lạnh có 1 chai
+            case 2: tủ lạnh có 1 , 2 user -> 1 -  1 user, user còn lại đợi hoặc xuống vòi nước
+            case 3: tủ lạnh có 2 , 5 user -> 2 có , 3 user còn lại xuống vòi nước
+            case 4: tủ lạnh có 5 , 50 user -> tủ lạnh có 50
+            case 5: 51 user -> 1 người bắt buộc phải đợi
+    ====> TÁI SỬ DỤNG CONNECT (tránh việc mở và đóng connect liên tục)
+================================================================
+
 
 
 
