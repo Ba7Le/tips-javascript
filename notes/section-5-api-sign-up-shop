@@ -1,0 +1,4 @@
+===================set up=================
+    cài đặt EXTENSIONS  
+        Mongo Snippets for Nodejs
+    => đi vào file shop.model.js gõ "!dmbg"
