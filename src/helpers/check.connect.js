@@ -9,14 +9,15 @@ const process = require('process');
 const countConnect = () => {
     const numConnection = mongoose.connections.length
     console.log(`Number of Connection::${numConnection}`)
+    return numConnection;
 }
 
 //check overload
 const checkOverload = () => {
-    setInterval(() => {
+    setTimeout(() => {
         const numConnection = mongoose.connections.length
-        const numCores = os.cpus().length; //2
-        const memoryUsage = process.memoryUsage().rss; // byte
+        const numCores = os.cpus().length; //4
+        const memoryUsage = process.memoryUsage().rss; // byte "Resident Set Size" trong tiếng Việt có thể được dịch là "Kích thước Bộ nhớ Đang cư trú" 
         //Example maximun number of connecions based on number of cores
         const maxConnections = numCores * 5;
 

@@ -8,7 +8,6 @@ class Database {
     constructor() {
         this.connect();
     }
-
     //Connect
     connect(type = 'mongodb') {
         if (1 === 1) {
@@ -16,18 +15,14 @@ class Database {
             mongoose.set('debug', { color: true })
         }
 
-        mongoose.connect(connectString, { maxPoolSize: 50 }
-        ).then(_ => {
-            console.log('Connected Mongodb success PRO', countConnect());
-        }).catch(err => console.log(`Error Connect`));
+        mongoose.connect(connectString, { maxPoolSize: 50 }).then(_ => console.log('Connected Mongodb Success', countConnect()))
+            .catch(err => console.log('Error connect'));
     }
-
 
     static getInstance() {
         if (!Database.instance) {
             Database.instance = new Database();
         }
-
         return Database.instance;
     }
 }
