@@ -15,11 +15,8 @@ require('./dbs/init.mongodb');
 
 //init routes
 app.get('/', (req, res, next) => {
-    const strCompress = 'Hello HungDaiHiep';
-
     return res.status(200).json({
-        message: 'wellcome to my chanel',
-        metadata: strCompress.repeat(10000)
+        message: 'wellcome to my chanel'
     })
 })
 
