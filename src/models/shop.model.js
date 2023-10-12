@@ -31,7 +31,7 @@ var shopSchema = new Schema({
         type: Schema.Types.Boolean,
         default: false
     },
-    role: {
+    roles: {
         type: Array,
         default: []
     }

@@ -15,7 +15,7 @@ const countConnect = () => {
 const checkOverload = () => {
     let intervalId = setInterval(() => {
         const numConnection = mongoose.connections.length
-        const numCores = os.cpus().length; //2
+        const numCores = os.cpus().length; //4
         const memoryUsage = process.memoryUsage().rss; // byte
         //Example maximun number of connecions based on number of cores
         const maxConnections = numCores * 5;
